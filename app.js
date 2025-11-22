@@ -69,8 +69,6 @@ const LANG = {
       #tw-magic-switch select, #tw-magic-switch input[type="checkbox"] { transform:scale(0.96); }
       #tw-magic-switch .hint { font-size:11px; color:#666; margin-left:6px; }
     </style>
-    <label title="Deep Reasoning">DR <input id="tw-deep" type="checkbox" /></label>
-    <label title="Creative Mode">CR <input id="tw-creative" type="checkbox" /></label>
     <select id="tw-detail" title="Detail level">
       <option value="standard">Standard</option>
       <option value="detailed">Detailed</option>
