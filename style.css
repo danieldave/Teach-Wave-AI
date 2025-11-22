@@ -315,3 +315,155 @@ footer {
   border-radius: 20px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.08);
 }
+
+
+
+
+
+
+
+
+/* Smooth fade-in for pages */
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ===========================
+   BUTTONS — FIXED + BEAUTIFUL
+=========================== */
+button,
+.action-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4da3ff, #0077ff);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.25);
+}
+
+button:hover,
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 119, 255, 0.3);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Ghost/Secondary Button */
+.btn-ghost {
+  background: transparent;
+  color: #0077ff;
+  border: 2px solid #0077ff;
+  box-shadow: none;
+}
+
+.btn-ghost:hover {
+  background: #e8f2ff;
+}
+
+/* ===========================
+   INPUTS
+=========================== */
+input, textarea, select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.8px solid #d9dce1;
+  outline: none;
+  font-size: 16px;
+  background: #fafbff;
+  transition: 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #4da3ff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.15);
+}
+
+/* ===========================
+   BLUR SECTIONS — FIXED
+=========================== */
+.blur-box {
+  filter: blur(5px);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.blur-overlay {
+  position: relative;
+}
+
+.blur-overlay::after {
+  content: "Hidden";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #555;
+  border-radius: 12px;
+}
+
+/* ===========================
+   CARDS
+=========================== */
+.card {
+  padding: 20px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  margin: 20px 0;
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+}
+
+/* ===========================
+   NAVBAR OR TOP BAR (Optional)
+=========================== */
+.navbar {
+  width: 100%;
+  padding: 15px 25px;
+  margin-bottom: 25px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 600px) {
+  h1 { font-size: 26px; }
+  button { width: 100%; }
+  .container { padding: 20px; }
+}
