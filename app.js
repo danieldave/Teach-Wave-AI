@@ -9,8 +9,8 @@
 console.log("TeachWave AI — upgraded app.js loaded");
 
 // ----- CONFIG -----
-const AI_ENDPOINT = "http://localhost:3000/api/generate"; // backend OpenAI proxy
-const COVER_ENDPOINT = "http://localhost:3000/api/cover"; // backend cover generator
+const AI_ENDPOINT = "https://teach-wave-ai.vercel.app/api/generate";
+const COVER_ENDPOINT = "https://teach-wave-ai.vercel.app/api/cover";
 let useMock = false; // set true to use a mock response while testing offline
 
 // ----- DOM -----
