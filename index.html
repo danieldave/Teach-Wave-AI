@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TeachWave AI — Lesson Plans</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4b00ff"/>
+
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="icon" href="icons/icon-192.png" />
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo"><i class="fas fa-robot"></i> TeachWave AI</div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#saved">Saved Lessons</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="hamburger"><i class="fas fa-bars"></i></div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Generate curriculum-ready lesson plans in seconds</h1>
+      <p>TeachWave AI crafts lessons tailored for Teachers, Students, and Parents — multilingual, printable, and sharable.</p>
+      <div class="hero-ctas">
+        <button id="scrollToForm" class="cta primary">Create Lesson Plan</button>
+        <button id="installBtn" class="cta">Install App</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <!-- decorative SVG / placeholder -->
+      <svg width="420" height="280" viewBox="0 0 420 280" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#6c00ff" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="#00d4ff" stop-opacity="0.9"/>
+          </linearGradient>
+        </defs>
+        <rect width="420" height="280" rx="20" fill="url(#g1)"></rect>
+        <g transform="translate(30,30)" fill="#fff" opacity="0.92">
+          <rect x="0" y="0" width="140" height="120" rx="10" fill="#ffffff22"/>
+          <rect x="160" y="0" width="220" height="80" rx="10" fill="#ffffff16"/>
+          <rect x="160" y="100" width="220" height="120" rx="10" fill="#ffffff16"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <main>
+    <section class="lesson-form" id="formSection">
+      <h2>Create Your Lesson Plan</h2>
+      <form id="lessonForm" class="card glass" autocomplete="off" onsubmit="return false;">
+        <!-- Persona at top (option A) -->
+        <div class="form-row">
+          <label for="persona">User Type</label>
+          <select id="persona" required>
+            <option>Teacher</option>
+            <option>Student</option>
+            <option>Parent</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="subject">Subject</label>
+          <select id="subject" required>
+            <option>Math</option>
+            <option>Science</option>
+            <option>English</option>
+            <option>History</option>
+            <option>Art</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="topic">Topic</label>
+          <input id="topic" type="text" placeholder="Enter topic" required/>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-row">
+            <label for="grade">Grade Level</label>
+            <select id="grade" required>
+              <option>Grade 1</option>
+              <option>Grade 2</option>
+              <option>Grade 3</option>
+              <option>Grade 4</option>
+              <option>Grade 5</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="duration">Duration</label>
+            <select id="duration" required>
+              <option>30 mins</option>
+              <option>45 mins</option>
+              <option>60 mins</option>
+              <option>90 mins</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="teachingStyle">Teaching Style</label>
+            <select id="teachingStyle" required>
+              <option>Lecture</option>
+              <option>Interactive</option>
+              <option>Project-Based</option>
+              <option>Gamified</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="preset">Preset</label>
+          <select id="preset">
+            <option>Creative Lesson</option>
+            <option>STEM Focused</option>
+            <option>Project-Based Learning</option>
+            <option>Gamified Lesson</option>
+            <option>Hands-On Activity</option>
+            <option>Minimal Resources</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="language">Language</label>
+          <select id="language">
+            <option>English</option>
+            <option>French</option>
+            <option>Spanish</option>
+            <option>Arabic</option>
+            <option>German</option>
+            <option>Chinese</option>
+            <option>Yoruba</option>
+            <option>Igbo</option>
+            <option>Hausa</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="notes">Additional Notes</label>
+          <textarea id="notes" placeholder="Any extra context or constraints"></textarea>
+        </div>
+
+        <div class="form-row actions">
+          <button type="button" id="generateBtn" class="big">Generate Lesson Plan</button>
+          <div id="genLoader" class="loader" hidden aria-hidden="true"></div>
+          <button type="button" id="clearBtn" class="small neutral">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="output-section">
+      <h2>Generated Lesson Plan</h2>
+      <div id="output" class="output-card card glass">Your lesson plan will appear here...</div>
+
+      <div class="output-actions">
+        <button id="copyBtn" class="small"><i class="fas fa-copy"></i> Copy</button>
+        <button id="saveBtn" class="small"><i class="fas fa-save"></i> Save</button>
+        <button id="downloadBtn" class="small"><i class="fas fa-download"></i> Download PDF</button>
+        <button id="docxBtn" class="small"><i class="fas fa-file-word"></i> Export .docx</button>
+        <button id="simplifyBtn" class="small"><i class="fas fa-magic"></i> Make Simpler</button>
+      </div>
+      <div id="pdf-export-area" style="display:none;"></div>
+    </section>
+
+    <aside class="saved-plans" id="saved">
+      <h3>Saved Lessons</h3>
+      <ul id="savedList"></ul>
+      <div id="noSaved" class="muted">No saved lessons yet.</div>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TeachWave AI — Built for Teachers, Students & Parents</p>
+  </footer>
+
+  <!-- Firebase (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+  <script src="firebase.js"></script>
+
+  <!-- Helpers -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- App -->
+  <script src="app.js"></script>
+
+  <!-- Register service worker for PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').catch(e => console.warn('SW register failed', e));
+    }
+
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+
+    document.getElementById('scrollToForm').addEventListener('click', () => {
+      document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

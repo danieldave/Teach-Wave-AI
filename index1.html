@@ -1,0 +1,247 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Lesson Plan Generator</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-a..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- html2pdf for client-side PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="brand">
+      <div class="logo">
+        <i class="fa-solid fa-robot"></i>
+        <span>EduAI</span>
+      </div>
+      <button class="cta primary" id="heroCreateBtn">Create Lesson Plan</button>
+    </div>
+
+    <nav class="navlinks" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#saved" id="savedNavLink">Saved Plans <span class="badge" id="savedCount">0</span></a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="hamburger" id="menuToggle" aria-label="Open menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-left">
+      <h1>Generate beautiful, complete lesson plans in seconds</h1>
+      <p class="sub">
+        Smart, curriculum-ready lesson plans powered by AI — designed for teachers and education creators.
+      </p>
+      <div class="hero-ctas">
+        <button class="cta primary" id="scrollToForm">Create Lesson Plan</button>
+        <a class="cta ghost" href="#about">Learn more</a>
+      </div>
+
+      <ul class="feature-list">
+        <li><i class="fa-solid fa-bolt"></i> Smart Presets</li>
+        <li><i class="fa-solid fa-globe"></i> Multi-language</li>
+        <li><i class="fa-solid fa-file-pdf"></i> PDF export & Save</li>
+      </ul>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card glass">
+        <img src="https://source.unsplash.com/800x600/?education,illustration" alt="illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APP -->
+  <main class="container">
+    <section class="app-grid">
+      <!-- Form Column -->
+      <div class="panel form-panel glass" id="formPanel">
+        <h2>Create a Lesson Plan</h2>
+        <form id="lessonForm" autocomplete="off">
+          <div class="row">
+            <label>Subject</label>
+            <select id="subject" required>
+              <option value="">Select subject</option>
+              <option>Mathematics</option>
+              <option>Science</option>
+              <option>English</option>
+              <option>History</option>
+              <option>Computer Science</option>
+              <option>Art</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label>Topic</label>
+            <input id="topic" type="text" placeholder="e.g. Fractions / Photosynthesis" required />
+          </div>
+
+          <div class="row split">
+            <div>
+              <label>Grade / Level</label>
+              <select id="grade" required>
+                <option value="">Select grade</option>
+                <option>K-2</option>
+                <option>3-5</option>
+                <option>6-8</option>
+                <option>9-12</option>
+                <option>Undergraduate</option>
+              </select>
+            </div>
+            <div>
+              <label>Duration</label>
+              <select id="duration" required>
+                <option value="">Choose</option>
+                <option>20 minutes</option>
+                <option>30 minutes</option>
+                <option>45 minutes</option>
+                <option>60 minutes</option>
+                <option>90 minutes</option>
+                <option>2+ sessions</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <label>Teaching Style</label>
+            <select id="style" required>
+              <option value="">Select style</option>
+              <option>Lecture</option>
+              <option>Interactive</option>
+              <option>Project-Based</option>
+              <option>Flipped Classroom</option>
+              <option>Gamified</option>
+              <option>Hands-On / Lab</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label>Preset</label>
+            <select id="preset">
+              <option value="default">Smart Default</option>
+              <option value="creative">Creative Lesson</option>
+              <option value="stem">STEM Focused</option>
+              <option value="project">Project-Based Learning</option>
+              <option value="gamify">Gamified Lesson</option>
+              <option value="handsOn">Hands-On Activity</option>
+              <option value="minimal">Minimal Resources</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label>Language</label>
+            <div class="lang-grid">
+              <button type="button" class="lang-btn active" data-lang="English">English</button>
+              <button type="button" class="lang-btn" data-lang="French">Français</button>
+              <button type="button" class="lang-btn" data-lang="Spanish">Español</button>
+              <button type="button" class="lang-btn" data-lang="Arabic">العربية</button>
+              <button type="button" class="lang-btn" data-lang="Portuguese">Português</button>
+              <button type="button" class="lang-btn" data-lang="German">Deutsch</button>
+            </div>
+            <input id="language" type="hidden" value="English" />
+          </div>
+
+          <div class="row">
+            <label>Materials available / Notes</label>
+            <textarea id="notes" placeholder="Available materials, constraints, differentiation needs..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button id="generateBtn" class="cta primary" type="submit">
+              <span id="generateText">Generate Lesson Plan</span>
+              <span class="spinner" id="loader" aria-hidden="true"></span>
+            </button>
+            <button id="clearForm" type="button" class="cta ghost">Clear</button>
+          </div>
+          <p class="hint">Tip: Use presets for quick tailored prompts.</p>
+        </form>
+      </div>
+
+      <!-- Output Column -->
+      <div class="panel output-panel glass" id="outputPanel">
+        <div class="output-toolbar">
+          <div>
+            <button id="savePlanBtn" class="cta small"><i class="fa-regular fa-save"></i> Save Plan</button>
+            <button id="copyBtn" class="cta small"><i class="fa-regular fa-copy"></i> Copy</button>
+            <button id="downloadPdfBtn" class="cta small"><i class="fa-solid fa-file-pdf"></i> Download PDF</button>
+          </div>
+          <div class="output-meta">
+            <small id="metaInfo">No plan generated yet.</small>
+          </div>
+        </div>
+
+        <div id="outputArea" class="output-area empty">
+          <div class="empty-state">
+            <i class="fa-solid fa-lightbulb"></i>
+            <p>No lesson generated yet. Fill the form and click “Generate Lesson Plan”.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SAVED PLANS SIDEBAR -->
+  <aside class="saved-sidebar" id="savedSidebar">
+    <div class="saved-head">
+      <h3>Saved Plans</h3>
+      <button id="closeSaved"><i class="fa-solid fa-times"></i></button>
+    </div>
+    <div id="savedList" class="saved-list"></div>
+    <div class="saved-actions">
+      <button id="clearAllSaved" class="cta ghost">Clear All</button>
+    </div>
+  </aside>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div>
+      <p>EduAI — AI Lesson Plan Generator</p>
+      <small>Contact: <a href="mailto:hello@example.com">hello@example.com</a></small>
+    </div>
+    <div>
+      <small>© <span id="year"></span> EduAI • Built with ♥</small>
+    </div>
+  </footer>
+
+  <!-- Modal for Plan View -->
+  <div class="modal" id="modal">
+    <div class="modal-card glass" id="modalCard">
+      <div class="modal-head">
+        <h4 id="modalTitle">Saved Plan</h4>
+        <button id="modalClose" class="btn-ghost"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot">
+        <button id="modalDownload" class="cta small">Download PDF</button>
+        <button id="modalDelete" class="cta small danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <!-- html2canvas for image export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // register service worker (async)
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('sw.js').catch(()=>{ /* ignore registration errors */ });
+    }
+  </script>
+</body>
+</html>
